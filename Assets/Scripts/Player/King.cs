@@ -32,13 +32,13 @@ public class King : Piece
 
             else if (
                         // property common in both type castling
-                        (this.movesMode == 0)        &&
+                        (this.movesMade == 0)        &&
                         (j.indRow == this.indRow)    &&
                         (
                                 // for queenside castling:   r _ _ _ k => _ _ k r _
                                 (
                                     (TheCanvas.AllSquares[this.indRow, 0].PieceInSquare != null)             &&
-                                    (TheCanvas.AllSquares[this.indRow, 0].PieceInSquare.movesMode == 0)      &&                                
+                                    (TheCanvas.AllSquares[this.indRow, 0].PieceInSquare.movesMade == 0)      &&                                
                                     (j.indCol == 2)                                                          && 
                                     (TheCanvas.AllSquares[this.indRow, 1].PieceInSquare == null)             &&
                                     (TheCanvas.AllSquares[this.indRow, 2].PieceInSquare == null)             &&
@@ -49,7 +49,7 @@ public class King : Piece
                                 // for kingside castling:    k _ _ r => _ r k _
                                 (
                                     (TheCanvas.AllSquares[this.indRow, 7].PieceInSquare != null )            &&
-                                    (TheCanvas.AllSquares[this.indRow, 7].PieceInSquare.movesMode == 0)      &&
+                                    (TheCanvas.AllSquares[this.indRow, 7].PieceInSquare.movesMade == 0)      &&
                                     (j.indCol == 6)                                                          && 
                                     (TheCanvas.AllSquares[this.indRow, 5].PieceInSquare == null)             &&
                                     (TheCanvas.AllSquares[this.indRow, 6].PieceInSquare == null) 

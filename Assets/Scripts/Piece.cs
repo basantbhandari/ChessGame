@@ -11,8 +11,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
     public bool isWhite;
     public int indRow;
     public int indCol;
-    private int number;
-    public int movesMode;
+    public int movesMade;
 
     public List<NormalOrSpecialMove> validMoves = new List<NormalOrSpecialMove>();
     public GameManager TheCanvas;
@@ -20,11 +19,20 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
 
 
-    void Start()
+    void Awake()
     {
         SetSquareOfPiece();
-        movesMode = 0;
+        movesMade = 0;
         TheCanvas = GameObject.FindObjectOfType<GameManager>();
+        SquareOfPiece.SetPieceCoordinates();
+
+      
+    }
+
+    public void Initialize(bool inpIsWhite, int inpMovesMade = 1)
+    {
+        this.isWhite = inpIsWhite;
+        this.movesMade = inpMovesMade;
     }
     public void OnPointerDown(PointerEventData eventData)
     {

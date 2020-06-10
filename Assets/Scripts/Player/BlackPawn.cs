@@ -12,7 +12,7 @@ public class BlackPawn : Piece
             // for first black pawn move
             if (
                     (
-                        (this.movesMode == 0)                                                                          &&   
+                        (this.movesMade == 0)                                                                          &&   
                         (
                             (j.indRow == (this.indRow - 2)) && 
                             (j.indCol == this.indCol)
@@ -61,7 +61,7 @@ public class BlackPawn : Piece
                     {
                             if ((j.gameObject.transform.childCount == 0) || (this.isWhite != j.PieceInSquare.isWhite))
                             {
-                                if (j.indRow != 7)
+                                if (j.indRow != 0)
                                 {
                                     validMoves.Add(new NormalOrSpecialMove(j));
                                 }

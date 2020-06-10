@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
 {
 
 
-    public GameObject whoseTurnText;
+    GameObject whoseTurnText;
     public bool isWhiteTurn;
-    public Square[,] AllSquares = new Square[8,8];         
+    public Square[,] AllSquares = new Square[8,8];
+    public PieceColorDisplayController SwitchPawnPanel;
     public bool AllowSquareSelection = false;
     public int[] CurrentSquareSelectionCoordinates = new int[2];
     public Square CurrentSquareSelection;
@@ -57,8 +58,11 @@ public class GameManager : MonoBehaviour
                 }
                 else if ((CurrentPieceSelection is WhitePawn) && (CurrentSquareSelection.indRow == 7))
                 {
-
-                }
+                        Debug.Log("White piece promotion");
+                        LastPieceMoved = CurrentPieceSelection;
+                        NormalPieceMovement();
+                        SwitchPawnPanel.WhitePiecesHandler(LastPieceMoved.SquareOfPiece);
+            }
                 else if ((CurrentPieceSelection is BlackPawn) && (CurrentSquareSelection.indRow == 2))
                 {
                         Debug.Log("Black an ampersend");
@@ -69,8 +73,11 @@ public class GameManager : MonoBehaviour
                 }
                 else if ((CurrentPieceSelection is BlackPawn) && (CurrentSquareSelection.indRow == 0))
                 {
-
-                }
+                        Debug.Log("Black pawn promotion");
+                        LastPieceMoved = CurrentPieceSelection;
+                        NormalPieceMovement();
+                        SwitchPawnPanel.BlackPiecesHandler(LastPieceMoved.SquareOfPiece);
+            }
                 else if ( CurrentPieceSelection is King)
                 {
                         Debug.Log("king Castelling ");
@@ -116,16 +123,27 @@ public class GameManager : MonoBehaviour
         placeToMoveTo.PieceInSquare = pieceToMove;
         placeToMoveTo.SetPieceCoordinates();
         pieceToMove.SetSquareOfPiece();
-        pieceToMove.movesMode += 1;
+        pieceToMove.movesMade += 1;
         turnNumber += 1;
     }
     private void RemovePieceFrom(Square theParentSquare)
     {
+        /* foreach (Transform child in theParentSquare.transform)
+         {
+             Destroy(child.gameObject);
+         }
+         theParentSquare.PieceInSquare = null;*/
+
         foreach (Transform child in theParentSquare.transform)
         {
-            Destroy(child.gameObject);
+            child.SetParent(null,false);
+            child.GetComponent<Canvas>().enabled = false;
+            child.GetComponent<Canvas>().sortingOrder = -1;
         }
         theParentSquare.PieceInSquare = null;
+
+
+
     }
     public void GameBtnHandler() 
     {

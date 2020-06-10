@@ -13,7 +13,7 @@ public class WhitePawn : Piece
             if (
                    // for first white pawn move
                   (  
-                      (this.movesMode == 0) &&
+                      (this.movesMade == 0) &&
                       (
                          (j.indRow == (this.indRow + 2)) && (j.indCol == this.indCol)
                       ) 
