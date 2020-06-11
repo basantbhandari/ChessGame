@@ -7,6 +7,8 @@ public class King : Piece
     public override void CheckValidMoves()
     {
         validMoves.Clear();
+        kingCantMoveHere.Clear();
+
         foreach (Square j in TheCanvas.AllSquares)
         {
             // condition for king valid movement
@@ -17,9 +19,11 @@ public class King : Piece
                    )
                )
             {
-                    if (
-                            (j.gameObject.transform.childCount == 0 ) ||
-                            (this.isWhite != j.PieceInSquare.isWhite)
+                kingCantMoveHere.Add(new NormalOrSpecialMove(j));
+                if (
+                           ((j.gameObject.transform.childCount == 0) || (this.isWhite != j.PieceInSquare.isWhite)) &&
+                           ((this.isWhite && !DoesListContainElement(TheCanvas.blackMoves, j)) ||
+                           (!this.isWhite && !DoesListContainElement(TheCanvas.blackMoves, j))  )
                        )
                     {
                         validMoves.Add(new NormalOrSpecialMove(j));
@@ -57,19 +61,9 @@ public class King : Piece
                         )
 
 
-
-
-
-
-
-
-
-
-
-
                    )
                 {
-                  validMoves.Add(new NormalOrSpecialMove(j, true));
+                  validMoves.Add(new NormalOrSpecialMove(j, true, false));
                 }
         }
 

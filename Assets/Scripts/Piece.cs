@@ -14,6 +14,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
     public List<NormalOrSpecialMove> validMoves = new List<NormalOrSpecialMove>();
     public GameManager TheCanvas;
     public Square SquareOfPiece;
+    public List<NormalOrSpecialMove> kingCantMoveHere = new List<NormalOrSpecialMove>();
 
 
 
@@ -174,10 +175,20 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
     }
 
+    public bool DoesListContainElement(List<NormalOrSpecialMove> theList, Square theElement)
+    {
+        foreach (NormalOrSpecialMove n in theList)
+        {
+            if (n.theValidMove == theElement)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-   
-    
+
 
 
 

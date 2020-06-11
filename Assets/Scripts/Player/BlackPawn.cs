@@ -28,7 +28,7 @@ public class BlackPawn : Piece
                     )
                )
             {
-                validMoves.Add(new NormalOrSpecialMove(j));
+                validMoves.Add(new NormalOrSpecialMove(j, false, false));
             }
             else if (
                     // TODO check one more time this condition for en passend
@@ -76,20 +76,16 @@ public class BlackPawn : Piece
                             }
 
                     }
- 
+            else if (
+                               (j.indRow == (this.SquareOfPiece.indRow - 1)) &&
+                               (j.indCol == this.SquareOfPiece.indCol) &&
+                               (j.gameObject.transform.childCount == 0)
+                        )
+                    {
+                        validMoves.Add(new NormalOrSpecialMove(j, false, false));
+                    }
+
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

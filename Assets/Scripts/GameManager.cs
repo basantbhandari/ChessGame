@@ -3,8 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum GameState
+{ 
+    NORMAL,
+    BLACKINCHECK,
+    WHITEINCHECK,
+    BLACKCHECKMATEWHITEWIN,
+    WHITECHECKMATEBLACKWIN,
+    STALEMATE
+
+}
+
 public class GameManager : MonoBehaviour
 {
+
+    public GameState stateOfGame = GameState.NORMAL;
+    public List<NormalOrSpecialMove> whiteMoves = new List<NormalOrSpecialMove>();
+    public List<NormalOrSpecialMove> blackMoves = new List<NormalOrSpecialMove>();
+    public Square WhiteKingPosition = null;
+    public Square BlackKingPosition = null;
+   
+
+
 
 
     GameObject whoseTurnText;
@@ -34,10 +55,94 @@ public class GameManager : MonoBehaviour
             AllSquares[t.indRow, t.indCol] = t;
         }
         whoseTurnText = GameObject.Find("TurnText");
+        CheckSituationOfBoard();
     }
 
 
     // custom method
+
+    private GameState CheckSituationOfBoard()
+    {
+        whiteMoves.Clear();
+        blackMoves.Clear();
+        WhiteKingPosition = null;
+        BlackKingPosition = null;
+
+        foreach (Square j in AllSquares)
+        {
+            if (j.PieceInSquare != null && j.PieceInSquare.isWhite)
+            {
+                if (j.PieceInSquare is King)
+                {
+                    WhiteKingPosition = j;
+                }
+                j.PieceInSquare.CheckValidMoves();
+                foreach (NormalOrSpecialMove n in j.PieceInSquare.kingCantMoveHere)
+                {
+                    if (n.canTakePiece)
+                    {
+                        whiteMoves.Add(new NormalOrSpecialMove(n.theValidMove));
+                    }
+                }
+            } else if (j.PieceInSquare != null && !j.PieceInSquare.isWhite)
+            {
+                if (j.PieceInSquare is King) 
+                {
+                    BlackKingPosition = j;
+                }
+                j.PieceInSquare.CheckValidMoves();
+                foreach (NormalOrSpecialMove n in j.PieceInSquare.kingCantMoveHere)
+                {
+                    if (n.canTakePiece)
+                    {
+                        whiteMoves.Add(new NormalOrSpecialMove(n.theValidMove));
+                    }
+                }
+
+            }
+
+        }
+
+        foreach (Square j in AllSquares)
+        {
+            if (j.PieceInSquare != null)
+            {
+                j.PieceInSquare.CheckValidMoves();
+            }
+
+        }
+
+        if (DoesListContainElement(whiteMoves, BlackKingPosition))
+        {
+            return GameState.BLACKINCHECK;
+        }
+        else if (DoesListContainElement(blackMoves, WhiteKingPosition))
+        {
+            return GameState.WHITEINCHECK;
+        }
+        else
+        {
+            return GameState.NORMAL;
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
     public void CheckSelection() 
     {
          AllowSquareSelection = true;
@@ -140,19 +245,6 @@ public class GameManager : MonoBehaviour
                 }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     private bool isSquareSpecialMove(List<NormalOrSpecialMove> theList, Square theElemnt)
     {
         foreach (NormalOrSpecialMove n in theList)
@@ -221,6 +313,8 @@ public class GameManager : MonoBehaviour
             isWhiteTurn = true;
             whoseTurnText.GetComponent<Text>().text = "Whites turn";
         }
+
+        CheckSituationOfBoard();
     }
     private void NormalPieceMovement()
     {
@@ -345,14 +439,14 @@ public class GameManager : MonoBehaviour
         }
 
 
-
+        stateOfGame = CheckSituationOfBoard();
       //  StateOfGame = CheckSituationOfBoard();
 
 
 
 
 
-    
+
     }
 
 

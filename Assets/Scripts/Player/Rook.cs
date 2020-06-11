@@ -16,6 +16,7 @@ public class Rook : Piece
         Square checkLeftSquare = null;
 
         validMoves.Clear();
+        kingCantMoveHere.Clear();
 
         foreach (Square j in TheCanvas.AllSquares)
         {
@@ -82,7 +83,16 @@ public class Rook : Piece
         }
 
 
+        foreach (NormalOrSpecialMove j in validMoves)
+        {
+            kingCantMoveHere.Add(j);
+        }
 
+
+
+
+        bool foundPieceRight = false;
+        bool foundPieceUp = false;
 
 
         // working on up , right square on the way
@@ -95,6 +105,38 @@ public class Rook : Piece
                 )
             {
                 validMoves.Remove(j);
+
+
+                if (
+                    (checkRightSquare != null && !(checkRightSquare.PieceInSquare is King) || (foundPieceRight)) && 
+                    (checkRightSquare != null) &&
+                    (j.theValidMove.indRow == checkRightSquare.indRow)
+                    )
+                {
+                    kingCantMoveHere.Remove(j);
+                    if (foundPieceRight == false) 
+                    {
+                        foundPieceRight = true;
+                    }
+                
+                }
+                else if (
+                  (checkUpSquare != null && !(checkUpSquare.PieceInSquare is King) || (foundPieceUp)) &&
+                  (checkUpSquare != null) &&
+                  (j.theValidMove.indCol == checkUpSquare.indCol)
+                  )
+                {
+                    kingCantMoveHere.Remove(j);
+                    if (foundPieceUp == false)
+                    {
+                        foundPieceUp = true;
+                    }
+
+                }
+
+
+
+
             }
         }
 
@@ -108,6 +150,9 @@ public class Rook : Piece
         bool foundLeft = false;
         bool foundDown = false;
 
+        bool foundPieceLeft = false;
+        bool foundPieceDown = false;
+
         foreach (NormalOrSpecialMove j in validMoveCopy)
         {
             if (checkLeftSquare != null && j.theValidMove == checkLeftSquare)
@@ -119,14 +164,56 @@ public class Rook : Piece
                 foundDown = true;
             }
 
-
             if (
-                    (foundLeft && (j.theValidMove.indCol < checkLeftSquare.indCol))  ||
+                    (foundLeft && (j.theValidMove.indCol < checkLeftSquare.indCol)) ||
                     (foundDown && (j.theValidMove.indRow < checkDownSquare.indRow))
                 )
             {
                 validMoves.Remove(j);
             }
+
+
+
+
+
+
+
+
+
+            if (
+                (checkLeftSquare != null)  &&
+                (j.theValidMove == checkLeftSquare) &&
+                (!(checkLeftSquare.PieceInSquare is King))
+               ) 
+            {
+                foundPieceLeft = true;
+            }
+            else if (
+               (checkDownSquare != null) &&
+               (j.theValidMove == checkDownSquare) &&
+               (!(checkDownSquare.PieceInSquare is King))
+              )
+            {
+                foundPieceDown = true;
+            }
+
+            if (
+                    (foundPieceLeft && (j.theValidMove.indCol < checkLeftSquare.indCol)) ||
+                    (foundPieceDown && (j.theValidMove.indRow < checkDownSquare.indRow))
+                )
+            {
+                kingCantMoveHere.Remove(j);
+            }
+
+
+
+
+
+
+
+
+
+
         }
 
 

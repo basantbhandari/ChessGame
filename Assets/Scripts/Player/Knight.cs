@@ -7,6 +7,7 @@ public class Knight : Piece
     public override void CheckValidMoves()
     {
         validMoves.Clear();
+        kingCantMoveHere.Clear();
         foreach (Square j in TheCanvas.AllSquares)
         {
             if (
@@ -25,6 +26,7 @@ public class Knight : Piece
                     )
              )
             {
+                    kingCantMoveHere.Add(new NormalOrSpecialMove(j));
                     if ((j.gameObject.transform.childCount == 0) || (this.isWhite != j.PieceInSquare.isWhite))
                     {
                         validMoves.Add(new NormalOrSpecialMove(j));
