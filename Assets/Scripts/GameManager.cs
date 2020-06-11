@@ -10,12 +10,16 @@ public class GameManager : MonoBehaviour
     GameObject whoseTurnText;
     public bool isWhiteTurn;
     public Square[,] AllSquares = new Square[8,8];
+
+    public GameObject UndoBtn;
     public PieceColorDisplayController SwitchPawnPanel;
     public bool AllowSquareSelection = false;
     public int[] CurrentSquareSelectionCoordinates = new int[2];
     public Square CurrentSquareSelection;
     public Piece CurrentPieceSelection;
-    public Piece LastPieceMoved = null;
+
+    public List<Movement> allMoves = new List<Movement>();
+    
     public int turnNumber = 1;
 
 
@@ -31,6 +35,8 @@ public class GameManager : MonoBehaviour
         }
         whoseTurnText = GameObject.Find("TurnText");
     }
+
+
     // custom method
     public void CheckSelection() 
     {
@@ -38,7 +44,13 @@ public class GameManager : MonoBehaviour
         // for non special move
         if (CurrentSquareSelection != null && !isSquareSpecialMove(CurrentPieceSelection.validMoves, CurrentSquareSelection))
         {
-                LastPieceMoved = CurrentPieceSelection;
+ 
+                allMoves.Add(new Movement(turnNumber,
+                                          CurrentPieceSelection.SquareOfPiece,
+                                          CurrentPieceSelection,
+                                          new NormalOrSpecialMove(CurrentSquareSelection),
+                                          CurrentSquareSelection.PieceInSquare
+                                          ));
                 NormalPieceMovement();
         }
         else if (CurrentSquareSelection != null)
@@ -47,46 +59,76 @@ public class GameManager : MonoBehaviour
                 if ((CurrentPieceSelection is WhitePawn) && (CurrentSquareSelection.indRow == 5))
                 {
                         Debug.Log("White an ampersend");
-                        LastPieceMoved = CurrentPieceSelection;
+                        allMoves.Add(new Movement(turnNumber,
+                                              CurrentPieceSelection.SquareOfPiece,
+                                              CurrentPieceSelection,
+                                              new NormalOrSpecialMove(CurrentSquareSelection, true),
+                                              AllSquares[CurrentSquareSelection.indRow -1 , CurrentSquareSelection.indCol].PieceInSquare
+                                              ));
+
+
                         RemovePieceFrom(this.AllSquares[CurrentSquareSelection.indRow - 1, CurrentSquareSelection.indCol]);
-                        movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
+                        MovePieceTo(CurrentPieceSelection, CurrentSquareSelection);
                         EndOfTurnStuff();
-                }
+}
                 else if ((CurrentPieceSelection is WhitePawn) && (CurrentSquareSelection.indRow == 7))
                 {
                         Debug.Log("White piece promotion");
-                        LastPieceMoved = CurrentPieceSelection;
+                        allMoves.Add(new Movement(turnNumber,
+                                             CurrentPieceSelection.SquareOfPiece,
+                                             CurrentPieceSelection,
+                                             new NormalOrSpecialMove(CurrentSquareSelection, true),
+                                             CurrentSquareSelection.PieceInSquare
+                                             ));
                         NormalPieceMovement();
-                        SwitchPawnPanel.WhitePiecesHandler(LastPieceMoved.SquareOfPiece);
+                        SwitchPawnPanel.WhitePiecesHandler(allMoves[allMoves.Count-1].MovedTo.theValidMove);
             }
                 else if ((CurrentPieceSelection is BlackPawn) && (CurrentSquareSelection.indRow == 2))
                 {
                         Debug.Log("Black an ampersend");
-                        LastPieceMoved = CurrentPieceSelection;
+                        allMoves.Add(new Movement(turnNumber,
+                                             CurrentPieceSelection.SquareOfPiece,
+                                             CurrentPieceSelection,
+                                             new NormalOrSpecialMove(CurrentSquareSelection, true),
+                                             AllSquares[CurrentSquareSelection.indRow + 1, CurrentSquareSelection.indCol].PieceInSquare
+
+                                             ));
+
+
                         RemovePieceFrom(this.AllSquares[CurrentSquareSelection.indRow + 1, CurrentSquareSelection.indCol]);
-                        movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
+                        MovePieceTo(CurrentPieceSelection, CurrentSquareSelection);
                         EndOfTurnStuff();
                 }
                 else if ((CurrentPieceSelection is BlackPawn) && (CurrentSquareSelection.indRow == 0))
                 {
                         Debug.Log("Black pawn promotion");
-                        LastPieceMoved = CurrentPieceSelection;
+                        allMoves.Add(new Movement(turnNumber,
+                                             CurrentPieceSelection.SquareOfPiece,
+                                             CurrentPieceSelection,
+                                             new NormalOrSpecialMove(CurrentSquareSelection, true),
+                                             CurrentSquareSelection.PieceInSquare
+                                             ));
                         NormalPieceMovement();
-                        SwitchPawnPanel.BlackPiecesHandler(LastPieceMoved.SquareOfPiece);
+                        SwitchPawnPanel.BlackPiecesHandler(allMoves[allMoves.Count - 1].MovedTo.theValidMove);
             }
                 else if ( CurrentPieceSelection is King)
                 {
                         Debug.Log("king Castelling ");
-                        LastPieceMoved = CurrentPieceSelection;
-                        movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
+                        allMoves.Add(new Movement(turnNumber,
+                                             CurrentPieceSelection.SquareOfPiece,
+                                             CurrentPieceSelection,
+                                             new NormalOrSpecialMove(CurrentSquareSelection, true),
+                                             CurrentSquareSelection.PieceInSquare
+                                             ));
+                        MovePieceTo(CurrentPieceSelection, CurrentSquareSelection);
 
                         if (CurrentSquareSelection.indCol == 2)
                         {
-                            movePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 0].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 3]);
+                            MovePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 0].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 3]);
                         }
                         else
                         {
-                            movePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 7].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 5]);
+                            MovePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 7].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 5]);
                         }
 
 
@@ -123,13 +165,13 @@ public class GameManager : MonoBehaviour
         return false;
     
     }
-    private void movePieceTo(Piece pieceToMove, Square placeToMoveTo)
+    private void MovePieceTo(Piece pieceToMove, Square placeToMoveTo)
     {
         pieceToMove.SquareOfPiece.PieceInSquare = null;
         pieceToMove.transform.SetParent(placeToMoveTo.gameObject.transform, false);
         placeToMoveTo.PieceInSquare = pieceToMove;
         placeToMoveTo.SetPieceCoordinates();
-        pieceToMove.SetSquareOfPiece();
+        //pieceToMove.SetSquareOfPiece();
         pieceToMove.movesMade += 1;
         turnNumber += 1;
     }
@@ -164,6 +206,11 @@ public class GameManager : MonoBehaviour
                                                               j.GetComponentInParent<Image>().color.b, 1);
         }
 
+        if (turnNumber != 1)
+        {
+            UndoBtn.SetActive(true);
+        }
+
         if (isWhiteTurn)
         {
             isWhiteTurn = false;
@@ -178,7 +225,7 @@ public class GameManager : MonoBehaviour
     private void NormalPieceMovement()
     {
         RemovePieceFrom(CurrentSquareSelection);
-        movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
+        MovePieceTo(CurrentPieceSelection, CurrentSquareSelection);
         EndOfTurnStuff();
     }
     private bool DoesListContainElement(List<NormalOrSpecialMove> theList, Square theElement)
@@ -193,7 +240,120 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public void UndoMove()
+    {
 
+        Movement LastMove = allMoves[allMoves.Count -1];
+        if (LastMove.MovedTo.isSpecial)
+        {
+
+            if (LastMove.PieceMoved is King)
+            {
+                if (LastMove.MovedTo.theValidMove.indCol == 2)
+                {
+                    MovePieceTo(this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 3].PieceInSquare, this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 0]);
+                    this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 0].PieceInSquare.movesMade -= 2;
+                }
+                else
+                {
+                    MovePieceTo(this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 5].PieceInSquare, this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 7]);
+                    this.AllSquares[LastMove.PieceMoved.SquareOfPiece.indRow, 7].PieceInSquare.movesMade -= 2;
+                }
+            }
+            else if (LastMove.PieceMoved is WhitePawn)
+            {
+                GameObject tempObject = LastMove.MovedTo.theValidMove.PieceInSquare.gameObject;
+                int tempMovesMade = LastMove.MovedTo.theValidMove.PieceInSquare.movesMade;
+
+                DestroyImmediate(LastMove.MovedTo.theValidMove.PieceInSquare);
+                LastMove.MovedTo.theValidMove.PieceInSquare = null;
+
+                WhitePawn ReAddedPiece = tempObject.AddComponent<WhitePawn>();
+                LastMove.MovedTo.theValidMove.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = Resources.Load("Pawns/whitepawn") as Texture;
+
+                ReAddedPiece.Initialize(true, tempMovesMade);
+
+            }
+            else if (LastMove.PieceMoved is BlackPawn)
+            {
+                GameObject tempObject = LastMove.MovedTo.theValidMove.PieceInSquare.gameObject;
+                int tempMovesMade = LastMove.MovedTo.theValidMove.PieceInSquare.movesMade;
+
+                DestroyImmediate(LastMove.MovedTo.theValidMove.PieceInSquare);
+                LastMove.MovedTo.theValidMove.PieceInSquare = null;
+
+                BlackPawn ReAddedPiece = tempObject.AddComponent<BlackPawn>();
+                LastMove.MovedTo.theValidMove.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = Resources.Load("Pawns/blackpawn") as Texture;
+
+                ReAddedPiece.Initialize(false, tempMovesMade);
+
+            }
+
+        }
+
+
+
+
+        LastMove.MovedTo.theValidMove.PieceInSquare.transform.SetParent(LastMove.MovedFrom.gameObject.transform, false);
+        LastMove.MovedFrom.PieceInSquare = LastMove.MovedTo.theValidMove.PieceInSquare;
+        LastMove.MovedFrom.SetPieceCoordinates();
+        LastMove.MovedTo.theValidMove.PieceInSquare.SetSquareOfPiece();
+        LastMove.MovedTo.theValidMove.PieceInSquare.movesMade -= 1;
+        LastMove.MovedTo.theValidMove.PieceInSquare = null;
+
+
+        if (LastMove.CapturedPiece != null)
+        {
+            LastMove.CapturedPiece.transform.SetParent(LastMove.CapturedPiece.SquareOfPiece.transform, false);
+            LastMove.CapturedPiece.GetComponent<Canvas>().enabled = true;
+            LastMove.CapturedPiece.GetComponent<Canvas>().sortingOrder = 1;
+            LastMove.CapturedPiece.SquareOfPiece.PieceInSquare = LastMove.CapturedPiece;
+        }
+
+        allMoves.RemoveAt(allMoves.Count - 1);
+        --turnNumber;
+
+        AllowSquareSelection = false;
+        CurrentPieceSelection = null;
+        CurrentSquareSelection = null;
+        foreach (Square j in this.AllSquares) 
+        {
+            j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
+                                                             j.GetComponentInParent<Image>().color.g,
+                                                             j.GetComponentInParent<Image>().color.b,
+                                                             1
+                                                             );
+        
+        }
+
+
+
+
+        if (turnNumber == 1)
+        {
+            UndoBtn.SetActive(false);
+        }
+        if (isWhiteTurn)
+        {
+            isWhiteTurn = false;
+            whoseTurnText.GetComponent<Text>().text = "Black's turn";
+        }
+        else
+        {
+            isWhiteTurn = true;
+            whoseTurnText.GetComponent<Text>().text = "White's turn";
+        }
+
+
+
+      //  StateOfGame = CheckSituationOfBoard();
+
+
+
+
+
+    
+    }
 
 
 

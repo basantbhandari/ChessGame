@@ -43,7 +43,7 @@ public class BlackPawn : Piece
                                 )
 
                             &&
-                            (TheCanvas.LastPieceMoved == TheCanvas.AllSquares[j.indRow + 1, j.indCol].PieceInSquare)
+                            (TheCanvas.allMoves[TheCanvas.allMoves.Count - 1].PieceMoved  == TheCanvas.AllSquares[j.indRow + 1, j.indCol].PieceInSquare)
                         )
 
                  )
@@ -56,9 +56,8 @@ public class BlackPawn : Piece
                          
                             ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol - 1)) && (j.gameObject.transform.childCount != 0)) ||
                             ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol + 1)) && (j.gameObject.transform.childCount != 0)) ||
-                            ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol)) && (j.gameObject.transform.childCount != 0)) ||
-                            ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol)) && (j.gameObject.transform.childCount == 0))
-
+                            ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol    )) && (j.gameObject.transform.childCount != 0)) ||
+                            ((j.indRow == (this.SquareOfPiece.indRow - 1)) && (j.indCol == (this.SquareOfPiece.indCol    )) && (j.gameObject.transform.childCount == 0))
 
                         )
                     )

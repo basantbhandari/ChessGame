@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class PawnToBBishopOnClick : PawnToPieceOnClick
 {
-    public override void ReplacePawn(Square LocationOfPawn)
+    public override void ReplacePawn(Square LocationOfPawn, int PreviousMovesMade)
     {
-
-       // RemovePawn(LocationOfPawn);
-
         Bishop AddedPiece = LocationOfPawn.GetComponentInChildren<Canvas>().gameObject.AddComponent<Bishop>();
-        AddedPiece.Initialize(true);
-       // LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
-       // thePieceColorController.ReturningToNormal();
-
+        AddedPiece.Initialize(false, PreviousMovesMade);
+ 
     }
 
 

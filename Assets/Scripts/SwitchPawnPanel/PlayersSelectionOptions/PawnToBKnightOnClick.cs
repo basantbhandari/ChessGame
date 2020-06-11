@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class PawnToBKnightOnClick : PawnToPieceOnClick
 {
-    public override void ReplacePawn(Square LocationOfPawn)
+    public override void ReplacePawn(Square LocationOfPawn, int PreviousMovesMade)
     {
-
-       //RemovePawn(LocationOfPawn);
-
         Knight AddedPiece = LocationOfPawn.GetComponentInChildren<Canvas>().gameObject.AddComponent<Knight>();
-        AddedPiece.Initialize(true);
-        //LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
-        //thePieceColorController.ReturningToNormal();
-
+        AddedPiece.Initialize(false, PreviousMovesMade);
+ 
     }
 
 

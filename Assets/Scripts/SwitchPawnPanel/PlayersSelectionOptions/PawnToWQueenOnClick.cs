@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class PawnToWQueenOnClick : PawnToPieceOnClick
 {
-    public override void ReplacePawn(Square LocationOfPawn)
+    public override void ReplacePawn(Square LocationOfPawn, int PreviousMovesMade)
     {
-
-      //  RemovePawn(LocationOfPawn);
-
         Queen AddedPiece = LocationOfPawn.GetComponentInChildren<Canvas>().gameObject.AddComponent<Queen>();
-        AddedPiece.Initialize(true);
-     //   LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
-      //  thePieceColorController.ReturningToNormal();
+        AddedPiece.Initialize(true, PreviousMovesMade);
 
     }
 

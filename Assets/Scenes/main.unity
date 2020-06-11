@@ -494,8 +494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -1006,8 +1004,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -1475,8 +1471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -3331,8 +3325,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: -293.48, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: -293.48, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &504794004
 MonoBehaviour:
@@ -3735,8 +3729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -3924,12 +3916,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhiteTurn: 0
+  UndoBtn: {fileID: 2022840998}
   SwitchPawnPanel: {fileID: 374129039}
   AllowSquareSelection: 0
   CurrentSquareSelectionCoordinates: 0000000000000000
   CurrentSquareSelection: {fileID: 0}
   CurrentPieceSelection: {fileID: 0}
-  LastPieceMoved: {fileID: 0}
   turnNumber: 1
 --- !u!114 &571569437
 MonoBehaviour:
@@ -4070,8 +4062,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -4188,8 +4178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -4485,8 +4473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -5855,8 +5841,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -6221,8 +6205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -6334,8 +6316,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: 52, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: 78, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008231858
 MonoBehaviour:
@@ -6759,8 +6741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: -127, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: -115, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120925240
 MonoBehaviour:
@@ -6934,8 +6916,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: -293.48, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: -295, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135312942
 MonoBehaviour:
@@ -7167,8 +7149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -7285,8 +7265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -7473,8 +7451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -8006,8 +7982,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -8046,8 +8020,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: -114, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: -114, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1274781033
 MonoBehaviour:
@@ -8209,8 +8183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -8493,8 +8465,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -8611,8 +8581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9156,8 +9124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9363,8 +9329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9551,8 +9515,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9608,8 +9570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9839,8 +9799,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -9879,8 +9837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: 247, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: 247, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510098166
 MonoBehaviour:
@@ -10042,8 +10000,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -10249,8 +10205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -10866,8 +10820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -11144,8 +11096,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -11440,8 +11390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -11558,8 +11506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -12240,8 +12186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -12761,8 +12705,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -12879,8 +12821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -13264,8 +13204,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0, g: 1, b: 0.8300319, a: 1}
+    m_PressedColor: {r: 0, g: 0.0013723373, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -13282,7 +13222,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2022841001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 571569436}
+        m_MethodName: UndoMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2022841001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13423,8 +13374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: 241, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: 246, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053760901
 MonoBehaviour:
@@ -13676,8 +13627,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}
@@ -13966,8 +13915,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32828787, y: 0.11364824}
   m_AnchorMax: {x: 0.7146402, y: 0.91414404}
-  m_AnchoredPosition: {x: 77, y: -6}
-  m_SizeDelta: {x: -245.40489, y: -298.90305}
+  m_AnchoredPosition: {x: 77, y: -13.5}
+  m_SizeDelta: {x: -245.40489, y: -300.89255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120758962
 MonoBehaviour:
@@ -14219,8 +14168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
-  indRow: 0
-  indCol: 0
   movesMade: 0
   TheCanvas: {fileID: 0}
   SquareOfPiece: {fileID: 0}

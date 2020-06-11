@@ -17,14 +17,17 @@ public class PawnToPieceOnClick : MonoBehaviour, IPointerDownHandler
     }
 
 
-    public void RemovePawn(Square RemoveFromHere)
+    public int RemovePawn(Square RemoveFromHere)
     {
+        int movesMadeByPawn = RemoveFromHere.PieceInSquare.movesMade;
          DestroyImmediate(RemoveFromHere.PieceInSquare);
          RemoveFromHere.PieceInSquare = null;
-    
+
+
+        return movesMadeByPawn;
     }
 
-    public virtual void ReplacePawn(Square LocationOfPawn)
+    public virtual void ReplacePawn(Square LocationOfPawn, int PreviousMovesMade)
       { 
           RemovePawn(LocationOfPawn);
           thePieceColorController.ReturningToNormal();
@@ -35,19 +38,13 @@ public class PawnToPieceOnClick : MonoBehaviour, IPointerDownHandler
 
       public void OnPointerDown(PointerEventData eventData)
       {
-          /*     RemovePawn(LocationOfPawn);
-               ReplacePawn(LocationOfPawn);
-               LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
-               thePieceColorController.ReturningToNormal();*/
-
-
-        RemovePawn(LocationOfPawn);
-        ReplacePawn(LocationOfPawn);
+        int movesMadeByPawn = RemovePawn(LocationOfPawn);
+        ReplacePawn(this.LocationOfPawn, movesMadeByPawn);
         
         LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
         thePieceColorController.ReturningToNormal();
 
-    }
+      }
 
 
 

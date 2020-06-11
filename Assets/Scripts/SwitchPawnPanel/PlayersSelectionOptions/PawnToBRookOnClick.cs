@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class PawnToBRookOnClick : PawnToPieceOnClick
 {
-    public override void ReplacePawn(Square LocationOfPawn)
+    public override void ReplacePawn(Square LocationOfPawn, int PreviousMovesMade)
     {
-
-        //RemovePawn(LocationOfPawn);
-
         Rook AddedPiece = LocationOfPawn.GetComponentInChildren<Canvas>().gameObject.AddComponent<Rook>();
-        AddedPiece.Initialize(true);
-       // LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
-       // thePieceColorController.ReturningToNormal();
+        AddedPiece.Initialize(false, PreviousMovesMade);
 
     }
 
