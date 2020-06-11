@@ -14,13 +14,12 @@ public class Bishop : Piece
 
 
         validMoves.Clear();
-
         foreach (Square j in TheCanvas.AllSquares)
         {
             if (
                 (
-                    (( j.indRow - this.indRow ) ==  ( j.indCol - this.indCol )) || 
-                    (( j.indRow - this.indRow ) == -( j.indCol - this.indCol ))
+                    ((j.indRow - this.SquareOfPiece.indRow) == (j.indCol - this.SquareOfPiece.indCol)) ||
+                    ((j.indRow - this.SquareOfPiece.indRow) == -(j.indCol - this.SquareOfPiece.indCol))
                 )
                )
             {
@@ -28,22 +27,22 @@ public class Bishop : Piece
 
                 if (j.gameObject.transform.childCount != 0)
                 {
-                    if (j.indRow < this.indRow && j.indCol > this.indCol)
+                    if (j.indRow < this.SquareOfPiece.indRow && j.indCol > this.SquareOfPiece.indCol)
                     {
-                            checkDownRightSquare = j;   
+                        checkDownRightSquare = j;
                     }
-                    else if (j.indRow < this.indRow && j.indCol < this.indCol)
+                    else if (j.indRow < this.SquareOfPiece.indRow && j.indCol < this.SquareOfPiece.indCol)
                     {
-                            checkDownLeftSquare = j;
+                        checkDownLeftSquare = j;
                     }
-                    else if (j.indRow > this.indRow && j.indCol < this.indCol)
+                    else if (j.indRow > this.SquareOfPiece.indRow && j.indCol < this.SquareOfPiece.indCol)
                     {
                         if (checkUpLeftSquare == null)
                         {
                             checkUpLeftSquare = j;
                         }
                     }
-                    else if (j.indRow > this.indRow && j.indCol > this.indCol)
+                    else if (j.indRow > this.SquareOfPiece.indRow && j.indCol > this.SquareOfPiece.indCol)
                     {
                         if (checkUpRightSquare == null)
                         {
@@ -53,6 +52,11 @@ public class Bishop : Piece
                 }
             }
         }
+
+
+
+
+
 
 
 
@@ -113,51 +117,6 @@ public class Bishop : Piece
             }
             
          
-        }
-
-
-
-
-
-
-        // used to blour the unvalid move
-
-
-        foreach (Square j in TheCanvas.AllSquares)
-        {
-            if (this.validMoves.Count != 0)
-            {
-                foreach (NormalOrSpecialMove n in validMoves)
-                {
-
-                    if (j == n.theValidMove)
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        1);
-                        break;
-                    }
-                    else
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        (float)0.45);
-                    }
-
-                }
-
-            }
-            else
-            {
-                j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        (float)0.45);
-
-            }
-
         }
 
 

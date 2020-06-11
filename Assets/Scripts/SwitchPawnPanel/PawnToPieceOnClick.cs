@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PawnToPieceOnClick : MonoBehaviour, IPointerDownHandler
 {
@@ -39,7 +40,13 @@ public class PawnToPieceOnClick : MonoBehaviour, IPointerDownHandler
                LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
                thePieceColorController.ReturningToNormal();*/
 
+
+        RemovePawn(LocationOfPawn);
         ReplacePawn(LocationOfPawn);
+        
+        LocationOfPawn.PieceInSquare.gameObject.GetComponentInChildren<RawImage>().texture = this.PieceTexture;
+        thePieceColorController.ReturningToNormal();
+
     }
 
 

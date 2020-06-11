@@ -27,21 +27,23 @@ public class Queen : Piece
             if (
                        // rook
                         (
-                                  (
-                                    ( this.indRow == j.indRow ) || 
-                                    ( this.indCol == j.indCol )
-                                   )
+                           (
+                                    (this.SquareOfPiece.indRow == j.indRow) ||
+                                    (this.SquareOfPiece.indCol == j.indCol)
+                            )
                         )       
                         ||
                         // bishop
-                        (  
+                        (
+                          
                                   (
-                                    (j.indRow - this.indRow) ==  (j.indCol - this.indCol)
+                                    (j.indRow - this.SquareOfPiece.indRow) == (j.indCol - this.SquareOfPiece.indCol)
                                   )
                                   ||
                                   (
-                                    (j.indRow - this.indRow ) == -(j.indCol - this.indCol)
+                                    (j.indRow - this.SquareOfPiece.indRow) == -(j.indCol - this.SquareOfPiece.indCol)
                                   )
+
                         )
                )
             {
@@ -50,52 +52,78 @@ public class Queen : Piece
                 if (j.gameObject.transform.childCount != 0)
                 {
 
-                           // for rook property
-                            if (j.indRow < this.indRow && this.indCol == j.indCol)
-                            {
-                                checkDownSquare = j;
-                            }
-                            else if (j.indCol < this.indCol && this.indRow == j.indRow)
-                            {
-                                checkLeftSquare = j;
-                            }
-                            else if (j.indCol > this.indCol && this.indRow == j.indRow)
-                            {
-                                if (checkRightSquare == null)
-                                {
-                                    checkRightSquare = j;
-                                }
-                            }
-                            else if (j.indRow > this.indRow && this.indCol == j.indCol)
-                            {
-                                if (checkUpSquare == null)
-                                {
-                                    checkUpSquare = j;
-                                }
-                            }
-                            // for bishop property
-                            else if (j.indRow < this.indRow && j.indCol > this.indCol)
-                            {
-                                checkDownRightSquare = j;
-                            }
-                            else if (j.indRow < this.indRow && j.indCol < this.indCol)
-                            {
-                                checkDownLeftSquare = j;
-                            }
-                            else if (j.indRow > this.indRow && j.indCol < this.indCol)
-                            {
-                                if (checkUpLeftSquare == null)
-                                {
-                                    checkUpLeftSquare = j;
-                                }
-                            }
-                            else if (j.indRow > this.indRow && j.indCol > this.indCol)
-                            {
-                                if (checkUpRightSquare == null)
-                                {
-                                    checkUpRightSquare = j;
-                                }
-                            }
+
+                    // for rook property
+                    if (j.indRow < this.SquareOfPiece.indRow && this.SquareOfPiece.indCol == j.indCol)
+                    {
+                        checkDownSquare = j;
+                    }
+                    else if (j.indCol < this.SquareOfPiece.indCol && this.SquareOfPiece.indRow == j.indRow)
+                    {
+                        checkLeftSquare = j;
+                    }
+                    else if (j.indCol > this.SquareOfPiece.indCol && this.SquareOfPiece.indRow == j.indRow)
+                    {
+                        if (checkRightSquare == null)
+                        {
+                            checkRightSquare = j;
+                        }
+                    }
+                    else if (j.indRow > this.SquareOfPiece.indRow && this.SquareOfPiece.indCol == j.indCol)
+                    {
+                        if (checkUpSquare == null)
+                        {
+                            checkUpSquare = j;
+                        }
+                    }
+                    // for bishop property
+                    else if (j.indRow < this.SquareOfPiece.indRow && j.indCol > this.SquareOfPiece.indCol)
+                    {
+                        checkDownRightSquare = j;
+                    }
+                    else if (j.indRow < this.SquareOfPiece.indRow && j.indCol < this.SquareOfPiece.indCol)
+                    {
+                        checkDownLeftSquare = j;
+                    }
+                    else if (j.indRow > this.SquareOfPiece.indRow && j.indCol < this.SquareOfPiece.indCol)
+                    {
+                        if (checkUpLeftSquare == null)
+                        {
+                            checkUpLeftSquare = j;
+                        }
+                    }
+                    else if (j.indRow > this.SquareOfPiece.indRow && j.indCol > this.SquareOfPiece.indCol)
+                    {
+                        if (checkUpRightSquare == null)
+                        {
+                            checkUpRightSquare = j;
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
             }
         }
@@ -218,53 +246,6 @@ public class Queen : Piece
 
 
         }
-
-
-
-
-
-
-        // used to blour the unvalid move
-        foreach (Square j in TheCanvas.AllSquares)
-        {
-            if (this.validMoves.Count != 0)
-            {
-                foreach (NormalOrSpecialMove n in validMoves)
-                {
-
-                    if (j == n.theValidMove)
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                          j.GetComponentInParent<Image>().color.g,
-                                                                          j.GetComponentInParent<Image>().color.b,
-                                                                          1);
-                        break;
-                    }
-                    else
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                          j.GetComponentInParent<Image>().color.g,
-                                                                          j.GetComponentInParent<Image>().color.b,
-                                                                          (float)0.45);
-                    }
-
-                }
-
-            }
-            else
-            {
-                j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                  j.GetComponentInParent<Image>().color.g,
-                                                                  j.GetComponentInParent<Image>().color.b,
-                                                                 (float)0.45);
-
-            }
-
-        }
-
-
-
-
 
 
 

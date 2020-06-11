@@ -20,7 +20,6 @@ public class Square : MonoBehaviour, IPointerDownHandler
         TheCanvas = GameObject.FindObjectOfType<GameManager>();
         if (this.gameObject.transform.childCount != 0)
         {
-            //PieceInSquare = GetComponentInChildren<Piece>();
             SetPieceCoordinates();
         }
     }
@@ -31,8 +30,6 @@ public class Square : MonoBehaviour, IPointerDownHandler
     public void SetPieceCoordinates()
     {
         PieceInSquare = GetComponentInChildren<Piece>();
-        PieceInSquare.indRow = indRow;
-        PieceInSquare.indCol = indCol;
         PieceInSquare.SquareOfPiece = this;
     }
     private bool DoesListContainElement(List<NormalOrSpecialMove> theList, Square theElement)
@@ -79,13 +76,6 @@ public class Square : MonoBehaviour, IPointerDownHandler
             TheCanvas.AllowSquareSelection = false;
         }
     }
-
-
-
-
-
-
-
 
 
 

@@ -14,13 +14,22 @@ public class WhitePawn : Piece
                    // for first white pawn move
                   (  
                       (this.movesMade == 0) &&
-                      (
-                         (j.indRow == (this.indRow + 2)) && (j.indCol == this.indCol)
-                      ) 
+                       (
+                         (j.indRow == (this.SquareOfPiece.indRow + 2)) && (j.indCol == this.SquareOfPiece.indCol)
+                      )
                       &&
                       (
-                         TheCanvas.AllSquares[this.indRow + 1, this.indCol].gameObject.transform.childCount == 0
+                         TheCanvas.AllSquares[this.SquareOfPiece.indRow + 1, this.SquareOfPiece.indCol].gameObject.transform.childCount == 0
                       )
+
+
+
+
+
+
+
+
+
                   ) 
                   && 
                   (
@@ -36,11 +45,19 @@ public class WhitePawn : Piece
                    (
                        (TheCanvas.AllSquares[j.indRow - 1, j.indCol].gameObject.transform.childCount != 0 )           &&
                        (TheCanvas.AllSquares[j.indRow - 1, j.indCol].PieceInSquare is BlackPawn           )           &&
-                       (j.indRow == this.indRow + 1                                                       )           &&
+                       /*                       (j.indRow == this.indRow + 1                                                       )           &&
+                                              (
+                                                (j.indCol == this.indCol - 1) || 
+                                                (j.indCol == this.indCol + 1)
+                                              ) */
+
+                       (j.indRow == this.SquareOfPiece.indRow + 1) &&
                        (
-                         (j.indCol == this.indCol - 1) || 
-                         (j.indCol == this.indCol + 1)
-                       ) 
+                         (j.indCol == this.SquareOfPiece.indCol - 1) ||
+                         (j.indCol == this.SquareOfPiece.indCol + 1)
+                       )
+
+
                        &&
                        (TheCanvas.LastPieceMoved == TheCanvas.AllSquares[j.indRow - 1, j.indCol].PieceInSquare)
                    )
@@ -51,10 +68,14 @@ public class WhitePawn : Piece
             else if (
                         // for move after first white pawn move
                         (
-                            ((j.indRow == (this.indRow + 1)) && (j.indCol == (this.indCol - 1)) && (j.gameObject.transform.childCount != 0)) ||
-                            ((j.indRow == (this.indRow + 1)) && (j.indCol == (this.indCol + 1)) && (j.gameObject.transform.childCount != 0)) ||
-                            ((j.indRow == (this.indRow + 1)) && (j.indCol == (this.indCol    )) && (j.gameObject.transform.childCount != 0)) ||
-                            ((j.indRow == (this.indRow + 1)) && (j.indCol == (this.indCol    )) && (j.gameObject.transform.childCount == 0))
+
+
+                            ((j.indRow == (this.SquareOfPiece.indRow + 1)) && (j.indCol == (this.SquareOfPiece.indCol - 1)) && (j.gameObject.transform.childCount != 0)) ||
+                            ((j.indRow == (this.SquareOfPiece.indRow + 1)) && (j.indCol == (this.SquareOfPiece.indCol + 1)) && (j.gameObject.transform.childCount != 0)) ||
+                            ((j.indRow == (this.SquareOfPiece.indRow + 1)) && (j.indCol == (this.SquareOfPiece.indCol)) && (j.gameObject.transform.childCount != 0)) ||
+                            ((j.indRow == (this.SquareOfPiece.indRow + 1)) && (j.indCol == (this.SquareOfPiece.indCol)) && (j.gameObject.transform.childCount == 0))
+
+
                         )
                 )
                 {
@@ -74,61 +95,6 @@ public class WhitePawn : Piece
                 }
 
         }
-
-
-
-
-
-
-
-        // used to blour the unvalid move
-        foreach (Square j in TheCanvas.AllSquares)
-        {
-            if (this.validMoves.Count != 0)
-            {
-                foreach (NormalOrSpecialMove n in validMoves)
-                {
-
-                    if (j == n.theValidMove)
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        1);
-                        break;
-                    }
-                    else
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        (float)0.45);
-                    }
-
-                }
-
-            }
-            else
-            {
-                j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                        j.GetComponentInParent<Image>().color.g,
-                                                                        j.GetComponentInParent<Image>().color.b,
-                                                                        (float)0.45);
-
-            }
-
-        }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

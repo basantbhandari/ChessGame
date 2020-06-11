@@ -19,39 +19,54 @@ public class Rook : Piece
 
         foreach (Square j in TheCanvas.AllSquares)
         {
-            if (((this.indRow == j.indRow) || (this.indCol == j.indCol)))
+       
+
+
+
+            if (((this.SquareOfPiece.indRow == j.indRow) || (this.SquareOfPiece.indCol == j.indCol)))
             {
                 validMoves.Add(new NormalOrSpecialMove(j));
 
                 if (j.gameObject.transform.childCount != 0)
                 {
-                    if (j.indRow < this.indRow)
+                    if (j.indRow < this.SquareOfPiece.indRow)
                     {
                         checkDownSquare = j;
                     }
-                    else if (j.indCol < this.indCol)
+                    else if (j.indCol < this.SquareOfPiece.indCol)
                     {
                         checkLeftSquare = j;
                     }
-                    else if (j.indCol > this.indCol)
+                    else if (j.indCol > this.SquareOfPiece.indCol)
                     {
                         if (checkRightSquare == null)
                         {
                             checkRightSquare = j;
                         }
                     }
-                    else if (j.indRow > this.indRow)
+                    else if (j.indRow > this.SquareOfPiece.indRow)
                     {
                         if (checkUpSquare == null)
                         {
                             checkUpSquare = j;
                         }
                     }
-                
+
                 }
-            
+
             }
-        
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -117,45 +132,6 @@ public class Rook : Piece
 
 
 
-
-
-
-
-        // used to blour the unvalid move
-        foreach (Square j in TheCanvas.AllSquares)
-        {
-            if (this.validMoves.Count != 0)
-            {
-                foreach (NormalOrSpecialMove n in validMoves)
-                { 
-                    if (j == n.theValidMove)
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                          j.GetComponentInParent<Image>().color.g,
-                                                                          j.GetComponentInParent<Image>().color.b,
-                                                                          1);
-                        break;
-                    }
-                    else
-                    {
-                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                          j.GetComponentInParent<Image>().color.g,
-                                                                          j.GetComponentInParent<Image>().color.b,
-                                                                          (float)0.45);
-                    }
-
-                }
-
-            }
-            else
-            {
-                j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
-                                                                  j.GetComponentInParent<Image>().color.g,
-                                                                  j.GetComponentInParent<Image>().color.b,
-                                                                  (float)0.45);
-
-            }
-        }
 
 
 

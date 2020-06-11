@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class Piece : MonoBehaviour, IPointerDownHandler
 {
     public bool isWhite;
-    public int indRow;
-    public int indCol;
     public int movesMade;
 
     public List<NormalOrSpecialMove> validMoves = new List<NormalOrSpecialMove>();
     public GameManager TheCanvas;
     public Square SquareOfPiece;
+
+
 
 
 
@@ -28,7 +28,6 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
       
     }
-
     public void Initialize(bool inpIsWhite, int inpMovesMade = 1)
     {
         this.isWhite = inpIsWhite;
@@ -52,15 +51,54 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             foreach (Square j in TheCanvas.AllSquares)
             {
-                j.GetComponentInParent<Image>().color = new Color( 
+                j.GetComponentInParent<Image>().color = new Color(
                                                                   j.GetComponentInParent<Image>().color.r,
-                                                                  j.GetComponentInParent<Image>().color.g, 
+                                                                  j.GetComponentInParent<Image>().color.g,
                                                                   j.GetComponentInParent<Image>().color.b, 1);
             }
             CheckValidMoves();
 
+            MethodThatBlourTheInvalidMoves();
+
             TheCanvas.CurrentPieceSelection = this;
             TheCanvas.CheckSelection();
+        }
+    }
+    private void MethodThatBlourTheInvalidMoves()
+    {
+        foreach (Square j in TheCanvas.AllSquares)
+        {
+            if (this.validMoves.Count != 0)
+            {
+                foreach (NormalOrSpecialMove n in validMoves)
+                {
+                    if (j == n.theValidMove)
+                    {
+                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
+                                                                          j.GetComponentInParent<Image>().color.g,
+                                                                          j.GetComponentInParent<Image>().color.b,
+                                                                          1);
+                        break;
+                    }
+                    else
+                    {
+                        j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
+                                                                          j.GetComponentInParent<Image>().color.g,
+                                                                          j.GetComponentInParent<Image>().color.b,
+                                                                          (float)0.45);
+                    }
+
+                }
+
+            }
+            else
+            {
+                j.GetComponentInParent<Image>().color = new Color(j.GetComponentInParent<Image>().color.r,
+                                                                  j.GetComponentInParent<Image>().color.g,
+                                                                  j.GetComponentInParent<Image>().color.b,
+                                                                  (float)0.45);
+
+            }
         }
     }
     public void SetSquareOfPiece()

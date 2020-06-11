@@ -31,10 +31,6 @@ public class GameManager : MonoBehaviour
         }
         whoseTurnText = GameObject.Find("TurnText");
     }
-
-
-
-
     // custom method
     public void CheckSelection() 
     {
@@ -83,18 +79,29 @@ public class GameManager : MonoBehaviour
                         Debug.Log("king Castelling ");
                         LastPieceMoved = CurrentPieceSelection;
                         movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
+
                         if (CurrentSquareSelection.indCol == 2)
                         {
-                            movePieceTo(this.AllSquares[CurrentPieceSelection.indRow, 0].PieceInSquare, this.AllSquares[CurrentPieceSelection.indRow, 3]);
+                            movePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 0].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 3]);
                         }
                         else
-                        { 
-                            movePieceTo(this.AllSquares[CurrentPieceSelection.indRow, 7].PieceInSquare, this.AllSquares[CurrentPieceSelection.indRow, 5]);
+                        {
+                            movePieceTo(this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 7].PieceInSquare, this.AllSquares[CurrentPieceSelection.SquareOfPiece.indRow, 5]);
                         }
-                        EndOfTurnStuff();
+
+
+
+
+
+
+                EndOfTurnStuff();
                 }
         }
     }
+
+
+
+
 
 
 
@@ -128,12 +135,6 @@ public class GameManager : MonoBehaviour
     }
     private void RemovePieceFrom(Square theParentSquare)
     {
-        /* foreach (Transform child in theParentSquare.transform)
-         {
-             Destroy(child.gameObject);
-         }
-         theParentSquare.PieceInSquare = null;*/
-
         foreach (Transform child in theParentSquare.transform)
         {
             child.SetParent(null,false);
@@ -180,7 +181,17 @@ public class GameManager : MonoBehaviour
         movePieceTo(CurrentPieceSelection, CurrentSquareSelection);
         EndOfTurnStuff();
     }
-
+    private bool DoesListContainElement(List<NormalOrSpecialMove> theList, Square theElement)
+    {
+        foreach (NormalOrSpecialMove n in theList)
+        {
+            if (n.theValidMove == theElement)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
